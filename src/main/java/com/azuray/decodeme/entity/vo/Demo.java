@@ -1,4 +1,4 @@
-package com.azuray.decodeme.entity;
+package com.azuray.decodeme.entity.vo;
 
 public class Demo {
 

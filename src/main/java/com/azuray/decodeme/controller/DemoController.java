@@ -1,6 +1,6 @@
 package com.azuray.decodeme.controller;
 
-import com.azuray.decodeme.entity.Demo;
+import com.azuray.decodeme.entity.vo.Demo;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
