@@ -1,8 +1,10 @@
 package com.azuray.decodeme.dao;
 
 
+import com.azuray.decodeme.common.SupperMapper;
 import com.azuray.decodeme.entity.vo.UserInfo;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
-public interface UserInfoMapper extends BaseMapper<UserInfo> {
+@Repository
+public interface UserInfoMapper extends SupperMapper<UserInfo> {
 }
