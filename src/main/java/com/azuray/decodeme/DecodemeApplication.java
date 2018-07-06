@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.azuray.decodeme.dao"})
-@ImportResource(locations = {"classpath:/application.xml"})
+@ImportResource(locations = {"classpath:/applicationContext.xml"})
 public class DecodemeApplication {
 
   public static void main(String[] args) {
