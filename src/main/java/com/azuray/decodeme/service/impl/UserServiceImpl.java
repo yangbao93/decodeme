@@ -1,15 +1,15 @@
 package com.azuray.decodeme.service.impl;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+public class UserServiceImpl
+//        implements UserDetailsService
+{
 
-public class UserServiceImpl implements UserDetailsService {
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+//        SimpleGrantedAuthority sg = new SimpleGrantedAuthority("USER");
+//        User us = new User("user","password", Arrays.asList(sg));
+//        return us;
+//    }
 
 
 }
