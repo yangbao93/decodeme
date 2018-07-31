@@ -12,52 +12,34 @@ import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 
 /**
- * 论坛头部信息
+ * 论坛评论信息
  * @author yb
  */
 @Data
-@TableName(value = "bbs_head")
-public class BbsHead extends Model<BbsHead> {
+@TableName(value = "bbs_comments")
+public class BbsComments extends Model<BbsComments> {
 
     /**
-     * 主键id
+     * id
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
-    /**
-     * 标题名称
-     */
-    @TableField(value = "head_name")
-    private String headName;
+    @TableField(value = "comment_context")
+    private String commentContext;
 
-    /**
-     * 标题关键字
-     */
-    @TableField(value = "head_key_words")
-    private String headKeyWords;
+    @TableField(value = "comment_belong_user")
+    private String commentBelongUser;
 
-    /**
-     * 帖子所属人
-     */
-    @TableField(value = "belong_user")
-    private String belongUser;
+    @TableField(value = "enable_view")
+    private boolean enableView;
 
-    /**
-     * 开启评论
-     */
     @TableField(value = "enable_comment")
     private boolean enableComment;
 
-    /**
-     * 创建时间
-     */
-    @TableField(value = "createtime")
+    @TableField(value = "create_time")
     private Date createTime;
 
-    /**
-     * 时间戳
-     */
     @TableField(value = "ts")
     private Date ts;
 
