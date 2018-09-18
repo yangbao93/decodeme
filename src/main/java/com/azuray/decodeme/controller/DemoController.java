@@ -1,5 +1,6 @@
 package com.azuray.decodeme.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,8 +11,12 @@ import com.azuray.decodeme.entity.vo.Demo;
 @RequestMapping("/demo")
 public class DemoController {
 
+    @Value("${default.key}")
+    private String sentence;
+
     @RequestMapping(value = "/say",method = RequestMethod.GET)
     public String demo() {
+        System.out.println(sentence);
         return "hello spring boot!";
     }
 
@@ -22,5 +27,10 @@ public class DemoController {
         demo.setKey("key");
         demo.setValue("value");
         return demo;
+    }
+
+    @RequestMapping(value = "say3", method = RequestMethod.GET)
+    public void demo3() {
+
     }
 }
