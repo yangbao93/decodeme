@@ -11,12 +11,12 @@ import com.azuray.decodeme.entity.vo.Demo;
 @RequestMapping("/demo")
 public class DemoController {
 
-    @Value("${default.key}")
-    private String sentence;
+//    @Value("${default.key}")
+//    private String sentence;
 
     @RequestMapping(value = "/say",method = RequestMethod.GET)
     public String demo() {
-        System.out.println(sentence);
+//        System.out.println(sentence);
         return "hello spring boot!";
     }
 
