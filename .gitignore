@@ -1,0 +1,22 @@
+#
+
+/.idea
+/target
+
+# Log File #
+*.log
+
+# Compiled File #
+*.class
+
+# Package File #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Idea File #
+*.iml
