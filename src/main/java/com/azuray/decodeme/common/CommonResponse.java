@@ -1,15 +1,15 @@
 package com.azuray.decodeme.common;
 
-import lombok.Data;
-
 import java.io.Serializable;
+
+import lombok.Data;
 
 @Data
 public class CommonResponse implements Serializable {
 
     private static final long serialVersionUID = 8726644005882171717L;
 
-    private String code;
+    private Integer code;
 
     private String msg;
 
@@ -19,12 +19,12 @@ public class CommonResponse implements Serializable {
 
     }
 
-    public CommonResponse(String code, String msg){
+    public CommonResponse(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public CommonResponse(String code, String msg, Object data) {
+    public CommonResponse(Integer code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
