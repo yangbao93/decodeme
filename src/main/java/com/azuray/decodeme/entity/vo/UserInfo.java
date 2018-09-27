@@ -21,7 +21,7 @@ public class UserInfo extends Model<UserInfo> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "user_id",type = IdType.UUID)
+    @TableId(value = "user_id", type = IdType.UUID)
     private String userId;
     public static String userIdStr = "user_id";
 
@@ -52,6 +52,10 @@ public class UserInfo extends Model<UserInfo> {
     @TableField("createtime")
     private Date createTime;
     public static String createTimeStr = "createTime";
+
+    @TableField("is_delete")
+    private Byte isDelete;
+    public static String isDeleteStr = "is_delete";
 
     @TableField("ts")
     private Date ts;
