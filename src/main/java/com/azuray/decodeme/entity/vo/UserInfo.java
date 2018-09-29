@@ -23,39 +23,30 @@ public class UserInfo extends Model<UserInfo> {
 
     @TableId(value = "user_id", type = IdType.UUID)
     private String userId;
-    public static String userIdStr = "user_id";
 
     @TableField("user_code")
     private String userCode;
-    public static String userCodeStr = "user_code";
 
     @TableField("user_name")
     private String userName;
-    public static String userNameStr = "user_name";
 
     @TableField("password")
     private String password;
-    public static String passwordStr = "password";
 
     @TableField("salt")
     private String salt;
-    public static String saltStr = "salt";
 
     @TableField("mail")
     private String mail;
-    public static String mailStr = "mail";
 
     @TableField("phone")
     private String phone;
-    public static String phoneStr = "phone";
 
     @TableField("createtime")
     private Date createTime;
-    public static String createTimeStr = "createTime";
 
     @TableField("is_delete")
     private Byte isDelete;
-    public static String isDeleteStr = "is_delete";
 
     @TableField("ts")
     private Date ts;
@@ -64,4 +55,14 @@ public class UserInfo extends Model<UserInfo> {
     protected Serializable pkVal() {
         return this.userId;
     }
+
+    public static String userIdStr = "user_id";
+    public static String userCodeStr = "user_code";
+    public static String userNameStr = "user_name";
+    public static String passwordStr = "password";
+    public static String saltStr = "salt";
+    public static String mailStr = "mail";
+    public static String phoneStr = "phone";
+    public static String createTimeStr = "createTime";
+    public static String isDeleteStr = "is_delete";
 }
