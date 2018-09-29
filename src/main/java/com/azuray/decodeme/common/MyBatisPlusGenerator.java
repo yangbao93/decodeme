@@ -24,13 +24,14 @@ public class MyBatisPlusGenerator {
         config.setActiveRecord(true) // 是否支持AR模式
                 .setAuthor("mybatis-plus") // 作者
                 // TODO 生成路径
-                .setOutputDir("/Users/")
+                .setOutputDir("/Users/yangbao/public")
                 .setFileOverride(true)  // 文件覆盖
                 .setIdType(IdType.AUTO) // 主键策略
                 .setServiceName("%sService")  // 设置生成的service接口的名字的首字母是否为I
                 // IEmployeeService
                 .setBaseResultMap(true)//生成基本的resultMap
-                .setBaseColumnList(true);//生成基本的SQL片段
+                .setBaseColumnList(true)
+                .setEnableCache(false);//生成基本的SQL片段
 
         //2. 数据源配置
         DataSourceConfig dsConfig = new DataSourceConfig();
