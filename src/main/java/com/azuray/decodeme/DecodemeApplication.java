@@ -3,6 +3,7 @@ package com.azuray.decodeme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 // 开启扫描controller，service，mapper
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 //@ImportResource(locations = {"classpath:/applicationContext.xml"})
 // 开启事务
 //@EnableTransactionManagement
+@EnableScheduling
 public class DecodemeApplication {
 
     public static void main(String[] args) {
