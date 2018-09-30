@@ -15,13 +15,16 @@ import springfox.documentation.service.Contact;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    // 登录界面：http://localhost:8888/swagger-ui.html#/
 
     @Bean
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
                 .select()
                 //当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.azuray.decodeme.controller")).paths(PathSelectors.any()).build();
+                .apis(RequestHandlerSelectors.basePackage("com.azuray.decodeme.controller"))
+                .paths(PathSelectors.any())
+                .build();
 
     }
 
@@ -35,7 +38,7 @@ public class SwaggerConfig {
                 //版本号
                 .version("1.0")
                 //描述
-                .description("API 描述").build();
+                .description("decodeme项目中接口").build();
     }
 
 }

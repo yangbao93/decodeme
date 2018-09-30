@@ -1,7 +1,8 @@
-package com.azuray.decodeme.entity.vo;
+package com.azuray.decodeme.entity.vo.bbs;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
@@ -28,38 +29,38 @@ public class BbsHead extends Model<BbsHead> {
     /**
      * 标题名称
      */
-    @TableField(value = "head_name")
     private String headName;
 
     /**
      * 标题关键字
      */
-    @TableField(value = "head_key_words")
     private String headKeyWords;
 
     /**
      * 帖子所属人
      */
-    @TableField(value = "belong_user")
     private String belongUser;
 
     /**
      * 开启评论
      */
-    @TableField(value = "enable_comment")
     private boolean enableComment;
 
     /**
      * 创建时间
      */
-    @TableField(value = "createtime")
     private Date createTime;
 
     /**
      * 时间戳
      */
-    @TableField(value = "ts")
     private Date ts;
+
+    /**
+     * 评论
+     */
+    @TableField(exist = false)
+    private List<BbsComments> commentsList;
 
     @Override
     protected Serializable pkVal() {
