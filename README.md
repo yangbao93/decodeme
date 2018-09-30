@@ -15,8 +15,12 @@
 
 数据传输：fastjson
 
+接口文档：swagger2
 
+数据库：mysql
 
-数据库使用mysql
-缓存使用redis
+缓存：redis
+
+文件存储：MongoDB
+
 自动登陆，爬虫
