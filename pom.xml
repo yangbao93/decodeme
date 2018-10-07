@@ -7,7 +7,12 @@
     <groupId>com.azuray</groupId>
     <artifactId>decodeme</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>decodeme-service</module>
+    </modules>
+
 
     <name>decodeme</name>
     <description>Demo project for Spring Boot</description>
@@ -20,23 +25,42 @@
     </parent>
 
     <properties>
+        <druid.version>1.1.10</druid.version>
+        <fastjson.version>1.2.47</fastjson.version>
         <HikariCP.version>3.2.0</HikariCP.version>
         <java.version>1.8</java.version>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <mybatis-plus-boot-starter.version>3.0-alpha</mybatis-plus-boot-starter.version>
+        <mybatis-plus.version>2.1.9</mybatis-plus.version>
+        <mybatis-plus-boot-starter.version>2.1.9</mybatis-plus-boot-starter.version>
+        <okhttp.version>3.9.1</okhttp.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-boot-legacy.version>1.1.0.RELEASE</spring-boot-legacy.version>
+        <swagger2.version>2.7.0</swagger2.version>
+        <swagger-ui.version>2.7.0</swagger-ui.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.0.1.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
-        <!-- 暂时没用到redis,后续再接上 -->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -61,17 +85,17 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.10</version>
+            <version>${druid.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
-            <version>2.1.9</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>2.1.9</version>
+            <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
 
         <dependency>
@@ -84,22 +108,17 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-test</artifactId>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
         <!-- http协议 -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>3.9.1</version>
+            <version>${okhttp.version}</version>
         </dependency>
         <!-- fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.47</version>
+            <version>${fastjson.version}</version>
         </dependency>
 
         <dependency>
@@ -111,7 +130,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-legacy</artifactId>
-            <version>1.1.0.RELEASE</version>
+            <version>${spring-boot-legacy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -121,12 +140,12 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
+            <version>${swagger2.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.7.0</version>
+            <version>${swagger-ui.version}</version>
         </dependency>
     </dependencies>
 
@@ -146,7 +165,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.azuray.decodeme.DecodemeApplication</mainClass>
+                    <mainClass>com.azuray.DecodemeApplication</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>
