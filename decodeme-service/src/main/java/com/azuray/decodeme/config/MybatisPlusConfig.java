@@ -1,9 +1,10 @@
 package com.azuray.decodeme.config;
 
-import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 
 @Configuration
 // @MapperScan("com.baomidou.springboot.mapper*")//这个注解，作用相当于下面的@Bean

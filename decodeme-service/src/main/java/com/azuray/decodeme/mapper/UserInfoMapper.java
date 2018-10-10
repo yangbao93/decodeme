@@ -1,10 +1,10 @@
 package com.azuray.decodeme.mapper;
 
-
-import com.azuray.decodeme.entity.vo.UserInfo;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import com.azuray.decodeme.entity.vo.UserInfo;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 @Repository
 @Mapper

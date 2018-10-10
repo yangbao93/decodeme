@@ -1,12 +1,5 @@
 package com.azuray.decodeme.controller;
 
-import com.azuray.decodeme.common.CommonResponse;
-import com.azuray.decodeme.common.ValidationUtil;
-import com.azuray.decodeme.constant.ResultCode;
-import com.azuray.decodeme.entity.vo.UserInfo;
-import com.azuray.decodeme.service.UserInfoService;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
@@ -14,6 +7,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.azuray.decodeme.common.CommonResponse;
+import com.azuray.decodeme.common.ValidationUtil;
+import com.azuray.decodeme.constant.ResultCode;
+import com.azuray.decodeme.entity.vo.UserInfo;
+import com.azuray.decodeme.service.UserInfoService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/user")
@@ -40,7 +42,7 @@ public class UserInfoController {
             }
             String encode = new BCryptPasswordEncoder().encode(userInfo.getPassword());
             userInfo.setPassword(encode);
-            userInfoService.insert(userInfo);
+            userInfoService.save(userInfo);
         } catch (Exception e) {
             log.error("添加用户失败", e.getMessage());
             e.printStackTrace();
@@ -58,7 +60,7 @@ public class UserInfoController {
         }
         // todo 获取当前用户的信息
         String userId = "";
-        UserInfo userInfoDb = userInfoService.selectById(userId);
+        UserInfo userInfoDb = userInfoService.getById(userId);
         // 有且只能修改昵称，邮箱，手机号
         if (!StringUtils.isEmpty(userInfo.getUserName())) {
             userInfoDb.setUserName(userInfo.getUserName());
@@ -85,25 +87,25 @@ public class UserInfoController {
      * @return 返回结果
      */
     private String cheackNameOrCodeOrEmailOrPhoneNotUsed(UserInfo user) {
-        EntityWrapper<UserInfo> usWrapper = new EntityWrapper<UserInfo>();
+        QueryWrapper<UserInfo> usWrapper = new QueryWrapper<>();
         usWrapper.eq(UserInfo.userCodeStr, user.getUserCode());
         int count = 0;
-        count = userInfoService.selectCount(usWrapper);
+        count = userInfoService.count(usWrapper);
         if (count > 0) {
             return "用户名已被使用！";
         }
         usWrapper.or().eq(UserInfo.userNameStr, user.getUserName());
-        count = userInfoService.selectCount(usWrapper);
+        count = userInfoService.count(usWrapper);
         if (count > 0) {
             return "昵称已被使用！";
         }
         usWrapper.or().eq(UserInfo.mailStr, user.getMail());
-        count = userInfoService.selectCount(usWrapper);
+        count = userInfoService.count(usWrapper);
         if (count > 0) {
             return "邮箱已被使用！";
         }
         usWrapper.or().eq(UserInfo.phoneStr, user.getPhone());
-        count = userInfoService.selectCount(usWrapper);
+        count = userInfoService.count(usWrapper);
         if (count > 0) {
             return "手机号已被使用！";
         }

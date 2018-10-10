@@ -31,8 +31,8 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
-        <mybatis-plus.version>2.1.9</mybatis-plus.version>
-        <mybatis-plus-boot-starter.version>2.1.9</mybatis-plus-boot-starter.version>
+        <mybatis-plus.version>3.0.4</mybatis-plus.version>
+        <mybatis-plus-boot-starter.version>3.0.4</mybatis-plus-boot-starter.version>
         <okhttp.version>3.9.1</okhttp.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

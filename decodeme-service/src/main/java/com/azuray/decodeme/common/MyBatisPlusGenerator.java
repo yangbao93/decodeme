@@ -1,15 +1,15 @@
 package com.azuray.decodeme.common;
 
-import com.baomidou.mybatisplus.enums.IdType;
+import java.sql.SQLException;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-
-import java.sql.SQLException;
 
 /**
  * 此类用于生成数据库中的文件
@@ -47,7 +47,8 @@ public class MyBatisPlusGenerator {
         //3. 策略配置globalConfiguration中
         StrategyConfig stConfig = new StrategyConfig();
         stConfig.setCapitalMode(true) //全局大写命名
-                .setDbColumnUnderline(true)  // 指定表名 字段名是否使用下划线
+                //.setDbColumnUnderline(true)
+                // 指定表名 字段名是否使用下划线
                 .setNaming(NamingStrategy.underline_to_camel) // 数据库表映射到实体的命名策略
                 //.setTablePrefix("tbl_") // 表的前缀
                 //TODO 要生成的表

@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 // 开启扫描controller，service，mapper
-@ComponentScan(basePackages = {"com.azuray.decodeme"})
+@ComponentScan(basePackages = {"com.azuray.decodeme.*"})
 // 开启扫描xml
 //@ImportResource(locations = {"classpath:/applicationContext.xml"})
 // 开启事务
