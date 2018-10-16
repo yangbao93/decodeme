@@ -2,8 +2,10 @@ package com.azuray.decodeme.config;
 
 import javax.sql.DataSource;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -36,19 +38,12 @@ public class MybatisPlusConfig {
         return scannerConfigurer;
     }
 
+    /**
+     * 因为springboot2.0开始不支持druid数据库连接池，所以需要引入druid-starter进行数据库连接池的配置
+     * @return
+     */
     @Bean(name = "dataSource")
-    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl(":3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&validationQuery=select 1");
-        dataSource.setUsername("");
-        dataSource.setPassword("");
-        dataSource.setDbType("mysql");
-        return dataSource;
+        return DruidDataSourceBuilder.create().build();
     }
-    //
-    //  @Bean
-    //  public H2KeyGenerator getH2KeyGenerator() {
-    //    return new H2KeyGenerator();
-    //  }
 }
