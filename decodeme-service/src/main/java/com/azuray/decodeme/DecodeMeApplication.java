@@ -13,9 +13,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 // 开启事务
 //@EnableTransactionManagement
 @EnableScheduling
-public class DecodemeApplication {
+public class DecodeMeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DecodemeApplication.class, args);
+        SpringApplication.run(DecodeMeApplication.class, args);
     }
 }

@@ -20,7 +20,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper,UserInfo> im
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public boolean cheackNameOrCodeOrEmailOrPhoneNotUsed(UserInfo user) {
+    public boolean checkNameOrCodeOrEmailOrPhoneNotUsed(UserInfo user) {
         log.debug(String.format("检查用户名:%s,用户编码%s,邮箱%s,手机号:%s是否重复", user.getUserName(), user.getUserCode(),
                 user.getMail(), user.getPhone()));
         QueryWrapper<UserInfo> usWrapper = new QueryWrapper<>();

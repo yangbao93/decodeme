@@ -10,9 +10,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
-public class WebSercurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final Logger log = LoggerFactory.getLogger(WebSercurityConfig.class);
+    private static final Logger log = LoggerFactory.getLogger(WebSecurityConfig.class);
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
