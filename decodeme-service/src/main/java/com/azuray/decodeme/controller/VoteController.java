@@ -43,12 +43,6 @@ public class VoteController {
         return new CommonResponse(ResultCode.SUCCESS_CODE, ResultCode.SUCCESS_MSG, voteHead);
     }
 
-    @Deprecated
-    @RequestMapping(value = "/topic/add", method = RequestMethod.POST)
-    public CommonResponse addVoteTopic(@RequestBody VoteTopic voteTopic) {
-        checkVoteTopicParam(voteTopic);
-        return null;
-    }
 
     @RequestMapping(value = "/choose/add", method = RequestMethod.POST)
     public CommonResponse addChoose(@RequestBody List<VoteChoose> voteChooseList) {
@@ -127,5 +121,10 @@ public class VoteController {
         return null;
     }
 
-
+    @Deprecated
+    @RequestMapping(value = "/topic/add", method = RequestMethod.POST)
+    public CommonResponse addVoteTopic(@RequestBody VoteTopic voteTopic) {
+        checkVoteTopicParam(voteTopic);
+        return null;
+    }
 }
