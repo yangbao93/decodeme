@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.azuray.decodeme.mapper.VoteTopicMapper" >
+  <resultMap id="BaseResultMap" type="com.azuray.decodeme.entity.vo.vote.VoteTopic" >
+    <id column="vote_topic_id" property="voteTopicId" jdbcType="BIGINT" />
+    <result column="vote_pid" property="votePid" jdbcType="BIGINT" />
+    <result column="topic_order" property="topicOrder" jdbcType="INTEGER" />
+    <result column="topic_name" property="topicName" jdbcType="VARCHAR" />
+    <result column="topic_note" property="topicNote" jdbcType="VARCHAR" />
+    <result column="topic_type" property="topicType" jdbcType="INTEGER" />
+    <result column="topic_value" property="topicValue" jdbcType="VARCHAR" />
+    <result column="topic_next" property="topicNext" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ts" property="ts" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vote_topic_id, vote_pid, topic_order, topic_name, topic_note, topic_type, topic_value, 
+    topic_next, create_time, ts
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from vote_topic
+    where vote_topic_id = #{voteTopicId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from vote_topic
+    where vote_topic_id = #{voteTopicId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.azuray.decodeme.entity.vo.vote.VoteTopic" >
+    insert into vote_topic (vote_topic_id, vote_pid, topic_order, 
+      topic_name, topic_note, topic_type, 
+      topic_value, topic_next, create_time, 
+      ts)
+    values (#{voteTopicId,jdbcType=BIGINT}, #{votePid,jdbcType=BIGINT}, #{topicOrder,jdbcType=INTEGER}, 
+      #{topicName,jdbcType=VARCHAR}, #{topicNote,jdbcType=VARCHAR}, #{topicType,jdbcType=INTEGER}, 
+      #{topicValue,jdbcType=VARCHAR}, #{topicNext,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{ts,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.azuray.decodeme.entity.vo.vote.VoteTopic" >
+    insert into vote_topic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="voteTopicId != null" >
+        vote_topic_id,
+      </if>
+      <if test="votePid != null" >
+        vote_pid,
+      </if>
+      <if test="topicOrder != null" >
+        topic_order,
+      </if>
+      <if test="topicName != null" >
+        topic_name,
+      </if>
+      <if test="topicNote != null" >
+        topic_note,
+      </if>
+      <if test="topicType != null" >
+        topic_type,
+      </if>
+      <if test="topicValue != null" >
+        topic_value,
+      </if>
+      <if test="topicNext != null" >
+        topic_next,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="ts != null" >
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="voteTopicId != null" >
+        #{voteTopicId,jdbcType=BIGINT},
+      </if>
+      <if test="votePid != null" >
+        #{votePid,jdbcType=BIGINT},
+      </if>
+      <if test="topicOrder != null" >
+        #{topicOrder,jdbcType=INTEGER},
+      </if>
+      <if test="topicName != null" >
+        #{topicName,jdbcType=VARCHAR},
+      </if>
+      <if test="topicNote != null" >
+        #{topicNote,jdbcType=VARCHAR},
+      </if>
+      <if test="topicType != null" >
+        #{topicType,jdbcType=INTEGER},
+      </if>
+      <if test="topicValue != null" >
+        #{topicValue,jdbcType=VARCHAR},
+      </if>
+      <if test="topicNext != null" >
+        #{topicNext,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.azuray.decodeme.entity.vo.vote.VoteTopic" >
+    update vote_topic
+    <set >
+      <if test="votePid != null" >
+        vote_pid = #{votePid,jdbcType=BIGINT},
+      </if>
+      <if test="topicOrder != null" >
+        topic_order = #{topicOrder,jdbcType=INTEGER},
+      </if>
+      <if test="topicName != null" >
+        topic_name = #{topicName,jdbcType=VARCHAR},
+      </if>
+      <if test="topicNote != null" >
+        topic_note = #{topicNote,jdbcType=VARCHAR},
+      </if>
+      <if test="topicType != null" >
+        topic_type = #{topicType,jdbcType=INTEGER},
+      </if>
+      <if test="topicValue != null" >
+        topic_value = #{topicValue,jdbcType=VARCHAR},
+      </if>
+      <if test="topicNext != null" >
+        topic_next = #{topicNext,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ts != null" >
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where vote_topic_id = #{voteTopicId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.azuray.decodeme.entity.vo.vote.VoteTopic" >
+    update vote_topic
+    set vote_pid = #{votePid,jdbcType=BIGINT},
+      topic_order = #{topicOrder,jdbcType=INTEGER},
+      topic_name = #{topicName,jdbcType=VARCHAR},
+      topic_note = #{topicNote,jdbcType=VARCHAR},
+      topic_type = #{topicType,jdbcType=INTEGER},
+      topic_value = #{topicValue,jdbcType=VARCHAR},
+      topic_next = #{topicNext,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where vote_topic_id = #{voteTopicId,jdbcType=BIGINT}
+  </update>
+</mapper>

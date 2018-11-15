@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.azuray.decodeme.mapper.VoteAnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.azuray.decodeme.entity.vo.vote.VoteAnswer" >
+    <id column="vote_ans_id" property="voteAnsId" jdbcType="BIGINT" />
+    <result column="vote_id" property="voteId" jdbcType="BIGINT" />
+    <result column="vote_topic_id" property="voteTopicId" jdbcType="BIGINT" />
+    <result column="vote_cho_id" property="voteChoId" jdbcType="BIGINT" />
+    <result column="ans_value" property="ansValue" jdbcType="VARCHAR" />
+    <result column="ans_user_name" property="ansUserName" jdbcType="VARCHAR" />
+    <result column="ans_user_code" property="ansUserCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ts" property="ts" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vote_ans_id, vote_id, vote_topic_id, vote_cho_id, ans_value, ans_user_name, ans_user_code, 
+    create_time, ts
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from vote_answer
+    where vote_ans_id = #{voteAnsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from vote_answer
+    where vote_ans_id = #{voteAnsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.azuray.decodeme.entity.vo.vote.VoteAnswer" >
+    insert into vote_answer (vote_ans_id, vote_id, vote_topic_id,
+      vote_cho_id, ans_value, ans_user_name, 
+      ans_user_code, create_time, ts
+      )
+    values (#{voteAnsId,jdbcType=BIGINT}, #{voteId,jdbcType=BIGINT}, #{voteTopicId,jdbcType=BIGINT}, 
+      #{voteChoId,jdbcType=BIGINT}, #{ansValue,jdbcType=VARCHAR}, #{ansUserName,jdbcType=VARCHAR}, 
+      #{ansUserCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{ts,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.azuray.decodeme.entity.vo.vote.VoteAnswer" >
+    insert into vote_answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="voteAnsId != null" >
+        vote_ans_id,
+      </if>
+      <if test="voteId != null" >
+        vote_id,
+      </if>
+      <if test="voteTopicId != null" >
+        vote_topic_id,
+      </if>
+      <if test="voteChoId != null" >
+        vote_cho_id,
+      </if>
+      <if test="ansValue != null" >
+        ans_value,
+      </if>
+      <if test="ansUserName != null" >
+        ans_user_name,
+      </if>
+      <if test="ansUserCode != null" >
+        ans_user_code,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="ts != null" >
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="voteAnsId != null" >
+        #{voteAnsId,jdbcType=BIGINT},
+      </if>
+      <if test="voteId != null" >
+        #{voteId,jdbcType=BIGINT},
+      </if>
+      <if test="voteTopicId != null" >
+        #{voteTopicId,jdbcType=BIGINT},
+      </if>
+      <if test="voteChoId != null" >
+        #{voteChoId,jdbcType=BIGINT},
+      </if>
+      <if test="ansValue != null" >
+        #{ansValue,jdbcType=VARCHAR},
+      </if>
+      <if test="ansUserName != null" >
+        #{ansUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="ansUserCode != null" >
+        #{ansUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.azuray.decodeme.entity.vo.vote.VoteAnswer" >
+    update vote_answer
+    <set >
+      <if test="voteId != null" >
+        vote_id = #{voteId,jdbcType=BIGINT},
+      </if>
+      <if test="voteTopicId != null" >
+        vote_topic_id = #{voteTopicId,jdbcType=BIGINT},
+      </if>
+      <if test="voteChoId != null" >
+        vote_cho_id = #{voteChoId,jdbcType=BIGINT},
+      </if>
+      <if test="ansValue != null" >
+        ans_value = #{ansValue,jdbcType=VARCHAR},
+      </if>
+      <if test="ansUserName != null" >
+        ans_user_name = #{ansUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="ansUserCode != null" >
+        ans_user_code = #{ansUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ts != null" >
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where vote_ans_id = #{voteAnsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.azuray.decodeme.entity.vo.vote.VoteAnswer" >
+    update vote_answer
+    set vote_id = #{voteId,jdbcType=BIGINT},
+      vote_topic_id = #{voteTopicId,jdbcType=BIGINT},
+      vote_cho_id = #{voteChoId,jdbcType=BIGINT},
+      ans_value = #{ansValue,jdbcType=VARCHAR},
+      ans_user_name = #{ansUserName,jdbcType=VARCHAR},
+      ans_user_code = #{ansUserCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where vote_ans_id = #{voteAnsId,jdbcType=BIGINT}
+  </update>
+</mapper>
