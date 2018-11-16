@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.azuray.decodeme.mapper.voteHeadMapper" >
+<mapper namespace="com.azuray.decodeme.mapper.VoteHeadMapper" >
   <resultMap id="BaseResultMap" type="com.azuray.decodeme.entity.vo.vote.VoteHead" >
     <id column="vote_id" property="voteId" jdbcType="BIGINT" />
     <result column="vote_name" property="voteName" jdbcType="VARCHAR" />
     <result column="vote_note" property="voteNote" jdbcType="VARCHAR" />
-    <result column="vote_private" property="votePrivate" jdbcType="BIT" />
+    <result column="vote_type" property="voteType" jdbcType="VARCHAR" />
     <result column="keywords" property="keywords" jdbcType="VARCHAR" />
     <result column="vote_user_code" property="voteUserCode" jdbcType="VARCHAR" />
     <result column="vote_user_name" property="voteUserName" jdbcType="VARCHAR" />
+    <result column="is_private" property="isPrivate" jdbcType="BIT" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
     <result column="user_nums" property="userNums" jdbcType="BIGINT" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-    <result column="is_delete" property="isDelete" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="ts" property="ts" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    vote_id, vote_name, vote_note, vote_private, keywords, vote_user_code, vote_user_name, 
-    user_nums, start_time, end_time, is_delete, create_time, ts
+    vote_id, vote_name, vote_note, vote_type, keywords, vote_user_code, vote_user_name,
+    is_private, is_delete, user_nums, start_time, end_time, create_time, ts
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from vote_head
     where vote_id = #{voteId,jdbcType=BIGINT}
@@ -30,19 +31,19 @@
     delete from vote_head
     where vote_id = #{voteId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.azuray.decodeme.entity.vo.vote.voteHead" >
-    insert into vote_head (vote_id, vote_name, vote_note, 
-      vote_private, keywords, vote_user_code, 
-      vote_user_name, user_nums, start_time, 
-      end_time, is_delete, create_time, 
-      ts)
-    values (#{voteId,jdbcType=BIGINT}, #{voteName,jdbcType=VARCHAR}, #{voteNote,jdbcType=VARCHAR}, 
-      #{votePrivate,jdbcType=BIT}, #{keywords,jdbcType=VARCHAR}, #{voteUserCode,jdbcType=VARCHAR}, 
-      #{voteUserName,jdbcType=VARCHAR}, #{userNums,jdbcType=BIGINT}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{endTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{ts,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.azuray.decodeme.entity.vo.vote.VoteHead" >
+    insert into vote_head (vote_id, vote_name, vote_note,
+      vote_type, keywords, vote_user_code,
+      vote_user_name, is_private, is_delete,
+      user_nums, start_time, end_time,
+      create_time, ts)
+    values (#{voteId,jdbcType=BIGINT}, #{voteName,jdbcType=VARCHAR}, #{voteNote,jdbcType=VARCHAR},
+      #{voteType,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{voteUserCode,jdbcType=VARCHAR},
+      #{voteUserName,jdbcType=VARCHAR}, #{isPrivate,jdbcType=BIT}, #{isDelete,jdbcType=BIT},
+      #{userNums,jdbcType=BIGINT}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+      #{createTime,jdbcType=TIMESTAMP}, #{ts,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.azuray.decodeme.entity.vo.vote.voteHead" >
+  <insert id="insertSelective" parameterType="com.azuray.decodeme.entity.vo.vote.VoteHead" >
     insert into vote_head
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="voteId != null" >
@@ -54,8 +55,8 @@
       <if test="voteNote != null" >
         vote_note,
       </if>
-      <if test="votePrivate != null" >
-        vote_private,
+      <if test="voteType != null" >
+        vote_type,
       </if>
       <if test="keywords != null" >
         keywords,
@@ -66,6 +67,12 @@
       <if test="voteUserName != null" >
         vote_user_name,
       </if>
+      <if test="isPrivate != null" >
+        is_private,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
       <if test="userNums != null" >
         user_nums,
       </if>
@@ -74,9 +81,6 @@
       </if>
       <if test="endTime != null" >
         end_time,
-      </if>
-      <if test="isDelete != null" >
-        is_delete,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -95,8 +99,8 @@
       <if test="voteNote != null" >
         #{voteNote,jdbcType=VARCHAR},
       </if>
-      <if test="votePrivate != null" >
-        #{votePrivate,jdbcType=BIT},
+      <if test="voteType != null" >
+        #{voteType,jdbcType=VARCHAR},
       </if>
       <if test="keywords != null" >
         #{keywords,jdbcType=VARCHAR},
@@ -107,6 +111,12 @@
       <if test="voteUserName != null" >
         #{voteUserName,jdbcType=VARCHAR},
       </if>
+      <if test="isPrivate != null" >
+        #{isPrivate,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
       <if test="userNums != null" >
         #{userNums,jdbcType=BIGINT},
       </if>
@@ -116,9 +126,6 @@
       <if test="endTime != null" >
         #{endTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="isDelete != null" >
-        #{isDelete,jdbcType=TINYINT},
-      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -127,7 +134,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.azuray.decodeme.entity.vo.vote.voteHead" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.azuray.decodeme.entity.vo.vote.VoteHead" >
     update vote_head
     <set >
       <if test="voteName != null" >
@@ -136,8 +143,8 @@
       <if test="voteNote != null" >
         vote_note = #{voteNote,jdbcType=VARCHAR},
       </if>
-      <if test="votePrivate != null" >
-        vote_private = #{votePrivate,jdbcType=BIT},
+      <if test="voteType != null" >
+        vote_type = #{voteType,jdbcType=VARCHAR},
       </if>
       <if test="keywords != null" >
         keywords = #{keywords,jdbcType=VARCHAR},
@@ -148,6 +155,12 @@
       <if test="voteUserName != null" >
         vote_user_name = #{voteUserName,jdbcType=VARCHAR},
       </if>
+      <if test="isPrivate != null" >
+        is_private = #{isPrivate,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
       <if test="userNums != null" >
         user_nums = #{userNums,jdbcType=BIGINT},
       </if>
@@ -156,9 +169,6 @@
       </if>
       <if test="endTime != null" >
         end_time = #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isDelete != null" >
-        is_delete = #{isDelete,jdbcType=TINYINT},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -169,18 +179,19 @@
     </set>
     where vote_id = #{voteId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.azuray.decodeme.entity.vo.vote.voteHead" >
+  <update id="updateByPrimaryKey" parameterType="com.azuray.decodeme.entity.vo.vote.VoteHead" >
     update vote_head
     set vote_name = #{voteName,jdbcType=VARCHAR},
       vote_note = #{voteNote,jdbcType=VARCHAR},
-      vote_private = #{votePrivate,jdbcType=BIT},
+      vote_type = #{voteType,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
       vote_user_code = #{voteUserCode,jdbcType=VARCHAR},
       vote_user_name = #{voteUserName,jdbcType=VARCHAR},
+      is_private = #{isPrivate,jdbcType=BIT},
+      is_delete = #{isDelete,jdbcType=BIT},
       user_nums = #{userNums,jdbcType=BIGINT},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
-      is_delete = #{isDelete,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       ts = #{ts,jdbcType=TIMESTAMP}
     where vote_id = #{voteId,jdbcType=BIGINT}

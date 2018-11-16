@@ -159,7 +159,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.azuray.DecodemeApplication</mainClass>
+                    <mainClass>com.azuray.decodeme.DecodeMeApplication</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>

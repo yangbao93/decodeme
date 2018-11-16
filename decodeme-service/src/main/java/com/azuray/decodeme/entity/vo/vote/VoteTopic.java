@@ -1,7 +1,10 @@
 package com.azuray.decodeme.entity.vo.vote;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -11,8 +14,9 @@ import java.util.Date;
  * @auther yb
  */
 @Data
+@TableName("vote_topic")
 @Deprecated
-public class VoteTopic {
+public class VoteTopic extends Model<VoteTopic> {
 
     private Long voteTopicId;
 
@@ -33,4 +37,9 @@ public class VoteTopic {
     private Date createTime;
 
     private Date ts;
+
+    @Override
+    protected Serializable pkVal() {
+        return voteTopicId;
+    }
 }

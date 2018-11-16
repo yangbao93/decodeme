@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -23,24 +24,24 @@ import java.util.List;
 public class VoteController {
 
     @Autowired
-    private VoteHeadService voteHeadService;
+    private VoteHeadService VoteHeadService;
 
     @Autowired
     private VoteChooseService voteChooseService;
 
     @RequestMapping(value = "/head/add", method = RequestMethod.POST)
-    public CommonResponse addVoteHead(@RequestBody VoteHead voteHead) {
-        assert voteHead != null;
+    public CommonResponse addVoteHead(@RequestBody VoteHead VoteHead) {
+        assert VoteHead != null;
         log.debug("新增一个投票信息");
-        String checkResult = checkVoteHeadParam(voteHead);
+        String checkResult = checkVoteHeadParam(VoteHead);
         if (!StringUtils.isEmpty(checkResult)) {
             return new CommonResponse(ResultCode.PARAM_ILLEGAL_CODE, checkResult);
         }
-        boolean saveResult = voteHeadService.save(voteHead);
+        boolean saveResult = VoteHeadService.save(VoteHead);
         if (!saveResult) {
             return new CommonResponse(ResultCode.FAIL_CODE, ResultCode.FAIL_MSG);
         }
-        return new CommonResponse(ResultCode.SUCCESS_CODE, ResultCode.SUCCESS_MSG, voteHead);
+        return new CommonResponse(ResultCode.SUCCESS_CODE, ResultCode.SUCCESS_MSG, VoteHead);
     }
 
 
@@ -100,22 +101,26 @@ public class VoteController {
     /**
      * 检查投票主体参数是否合规
      *
-     * @param voteHead
+     * @param VoteHead
      */
-    private String checkVoteHeadParam(VoteHead voteHead) {
-        if (StringUtils.isEmpty(voteHead.getVoteName())) {
+    private String checkVoteHeadParam(VoteHead VoteHead) {
+        if (StringUtils.isEmpty(VoteHead.getVoteName())) {
             return "投票名称不允许为空";
         }
-        if (StringUtils.isEmpty(voteHead.getVoteUserCode())) {
+        if (StringUtils.isEmpty(VoteHead.getVoteUserCode())) {
             return "用户编码不允许为空";
         }
-        if (StringUtils.isEmpty(voteHead.getVoteUserName())) {
+        List<String> typeList = Arrays.asList("1", "2");
+        if (StringUtils.isEmpty(VoteHead.getVoteType()) || (!typeList.contains(VoteHead.getVoteType()))) {
+            return "投票类型不正确";
+        }
+        if (StringUtils.isEmpty(VoteHead.getVoteUserName())) {
             return "用户名不允许为空";
         }
-        if (voteHead.getStartTime() == null || voteHead.getEndTime() == null) {
+        if (VoteHead.getStartTime() == null || VoteHead.getEndTime() == null) {
             return "起止时间不能为空";
         }
-        if (voteHead.getStartTime().after(voteHead.getEndTime())) {
+        if (VoteHead.getStartTime().after(VoteHead.getEndTime())) {
             return "起始时间不能晚于结束时间";
         }
         return null;
