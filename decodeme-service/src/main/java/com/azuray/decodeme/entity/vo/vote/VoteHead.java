@@ -49,6 +49,10 @@ public class VoteHead extends Model<VoteHead> {
      */
     private Boolean isPrivate;
     /**
+     * 是否匿名
+     */
+    private Boolean isAnonymous;
+    /**
      * 是否删除
      */
     private Boolean isDelete;

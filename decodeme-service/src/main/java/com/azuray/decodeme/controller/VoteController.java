@@ -2,9 +2,11 @@ package com.azuray.decodeme.controller;
 
 import com.azuray.decodeme.common.CommonResponse;
 import com.azuray.decodeme.constant.ResultCode;
+import com.azuray.decodeme.entity.vo.vote.VoteAnswer;
 import com.azuray.decodeme.entity.vo.vote.VoteChoose;
 import com.azuray.decodeme.entity.vo.vote.VoteHead;
 import com.azuray.decodeme.entity.vo.vote.VoteTopic;
+import com.azuray.decodeme.service.VoteAnswerService;
 import com.azuray.decodeme.service.VoteChooseService;
 import com.azuray.decodeme.service.VoteHeadService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,13 +31,16 @@ public class VoteController {
     @Autowired
     private VoteChooseService voteChooseService;
 
+    @Autowired
+    private VoteAnswerService voteAnswerService;
+
     @RequestMapping(value = "/head/add", method = RequestMethod.POST)
     public CommonResponse addVoteHead(@RequestBody VoteHead VoteHead) {
         assert VoteHead != null;
         log.debug("新增一个投票信息");
         String checkResult = checkVoteHeadParam(VoteHead);
         if (!StringUtils.isEmpty(checkResult)) {
-            return new CommonResponse(ResultCode.PARAM_ILLEGAL_CODE, checkResult);
+            return CommonResponse.failResponse(checkResult);
         }
         boolean saveResult = VoteHeadService.save(VoteHead);
         if (!saveResult) {
@@ -49,13 +54,58 @@ public class VoteController {
     public CommonResponse addChoose(@RequestBody List<VoteChoose> voteChooseList) {
         String checkResult = checkChooseParam(voteChooseList);
         if (!StringUtils.isEmpty(checkResult)) {
-            return new CommonResponse(ResultCode.PARAM_ILLEGAL_CODE, checkResult);
+            return CommonResponse.failResponse(checkResult);
         }
         boolean saveResult = voteChooseService.saveBatch(voteChooseList);
         if (!saveResult) {
-            return new CommonResponse(ResultCode.FAIL_CODE, ResultCode.FAIL_MSG);
+            return CommonResponse.failResponse();
         }
         return new CommonResponse(ResultCode.SUCCESS_CODE, ResultCode.SUCCESS_MSG, voteChooseList);
+    }
+
+    @RequestMapping(value = "/answer/add", method = RequestMethod.POST)
+    public CommonResponse addAnswer(@RequestBody List<VoteAnswer> answerList) {
+        String checkResult = checkAnswerParam(answerList);
+        if (!StringUtils.isEmpty(checkResult)) {
+            return CommonResponse.failResponse(checkResult);
+        }
+        boolean saveResult = voteAnswerService.saveBatch(answerList);
+        if (saveResult) {
+            return CommonResponse.successResponse(answerList);
+        }
+        return CommonResponse.failResponse();
+    }
+
+    /**
+     * 查询答案是否合规
+     *
+     * @param answerList 参数
+     * @return 错误信息
+     */
+    private String checkAnswerParam(List<VoteAnswer> answerList) {
+        // 检查是否有该投票信息
+        Long voteId = answerList.get(0).getVoteId();
+        if (voteId == null) {
+            return "投票题目编码不正确，请检查";
+        }
+        VoteHead voteHead = VoteHeadService.getById(voteId);
+        if (voteHead == null) {
+            return "没有查到对应的投票题目";
+        }
+        for (VoteAnswer answer : answerList) {
+            if (StringUtils.isEmpty(answer.getVoteChoId())) {
+                return "投票选择不能为空";
+            }
+            if (StringUtils.isEmpty(answer.getAnsValue())) {
+                return "投票结果不能为空";
+            }
+            if (!voteHead.getIsAnonymous()) {
+                if (StringUtils.isEmpty(answer.getAnsUserCode()) || StringUtils.isEmpty(answer.getAnsUserName())) {
+                    return "非匿名投票用户不能为空";
+                }
+            }
+        }
+        return null;
     }
 
     /**

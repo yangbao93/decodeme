@@ -1,5 +1,8 @@
 package com.azuray.decodeme.common;
 
+import com.alibaba.fastjson.JSONObject;
+import com.azuray.decodeme.constant.ResultCode;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,5 +37,32 @@ public class CommonResponse implements Serializable {
         this.code = code;
         this.msg = msg;
         this.data = data;
+    }
+
+    /**
+     * 通用成功返回信息
+     *
+     * @param data 类容
+     * @return 成功信息
+     */
+    public static CommonResponse successResponse(Object data) {
+        if (data == null) {
+            return new CommonResponse(ResultCode.SUCCESS_CODE, ResultCode.SUCCESS_MSG);
+        }
+        return new CommonResponse(ResultCode.SUCCESS_CODE, ResultCode.SUCCESS_MSG, data);
+    }
+
+    /**
+     * 通用失败返回信息
+     *
+     * @param data 失败内容
+     * @return
+     */
+    public static CommonResponse failResponse(Object... data) {
+        String failMsg = ResultCode.FAIL_MSG;
+        if (data != null) {
+            failMsg = JSONObject.toJSONString(data);
+        }
+        return new CommonResponse(ResultCode.FAIL_CODE, failMsg);
     }
 }
