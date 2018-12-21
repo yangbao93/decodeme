@@ -1,4 +1,4 @@
-package com.azuray.decodeme.common;
+package com.azuray.decodeme.common.utils;
 
 import java.security.MessageDigest;
 

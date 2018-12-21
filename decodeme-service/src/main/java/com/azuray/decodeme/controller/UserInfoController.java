@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.azuray.decodeme.common.CommonResponse;
-import com.azuray.decodeme.common.ValidationUtil;
+import com.azuray.decodeme.common.utils.ValidationUtil;
 import com.azuray.decodeme.constant.ResultCode;
 import com.azuray.decodeme.entity.vo.UserInfo;
 import com.azuray.decodeme.service.UserInfoService;
@@ -68,7 +68,7 @@ public class UserInfoController {
         if ((!StringUtils.isEmpty(userInfo.getMail())) && ValidationUtil.validationEmail(userInfo.getMail())) {
             userInfoDb.setMail(userInfo.getMail());
         }
-        if ((!StringUtils.isEmpty(userInfo.getPhone())) && ValidationUtil.vaildationPhone(userInfo.getPhone())) {
+        if ((!StringUtils.isEmpty(userInfo.getPhone())) && ValidationUtil.validationPhone(userInfo.getPhone())) {
             userInfoDb.setPhone(userInfo.getPhone());
         }
         // 更新DB
