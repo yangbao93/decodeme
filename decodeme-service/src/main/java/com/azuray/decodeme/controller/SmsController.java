@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,8 +25,10 @@ public class SmsController {
     @RequestMapping(value = "/success", method = RequestMethod.GET)
     public String getTicket(@RequestParam("phone") String phoneNumber,
                             @RequestParam("appId") int appId,
-                            @RequestParam("appKey") String appKey) {
-        smsService.sendTicketSms(appId, appKey, phoneNumber);
+                            @RequestParam("appKey") String appKey,
+                            @RequestParam("templateId") int templateId,
+                            @RequestParam("sign") String sign) {
+        smsService.sendTicketSms(appId, appKey, phoneNumber, templateId, sign);
         return "done!";
     }
 }
